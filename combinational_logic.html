@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Combinational logic &mdash; RTLCodingStyle v1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sequential logic" href="sequential_logic.html" />
+    <link rel="prev" title="Macro" href="macro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RTLCodingStyle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="indentation_and_alignment.html">Indentation and alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_naming.html">Variable definition and naming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filelist.html">Filelist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datatype_parameter.html">Data-type Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate_if_for.html">Generate if/for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macro.html">Macro</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Combinational logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sequential_logic.html">Sequential logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clock_and_reset.html">Clock and reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RTLCodingStyle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Combinational logic</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/combinational_logic.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="combinational-logic">
+<h1>Combinational logic<a class="headerlink" href="#combinational-logic" title="Permalink to this heading"></a></h1>
+<p><strong>assign</strong> and <strong>always_comb</strong> are used to represent combinational logic.</p>
+<ul class="simple">
+<li><p><strong>assign</strong></p></li>
+</ul>
+<p><strong>assign</strong> is recommended to be used for the following occasions：</p>
+<ol class="arabic simple">
+<li><p>combinational logic is relatively simple.</p></li>
+<li><p>combinational logic is relatively symmetric.</p></li>
+</ol>
+<p>For example:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// simple example</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">handshake_done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">req_vld</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">req_rdy</span><span class="p">;</span>
+
+<span class="c1">// symmetric example</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">fix_arb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_qos_req_en</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">high_qos_req_pld</span><span class="w">  </span><span class="o">:</span>
+<span class="w">                 </span><span class="n">mid_qos_req_en</span><span class="w">  </span><span class="o">?</span><span class="w"> </span><span class="n">mid_qos_req_pld</span><span class="w">   </span><span class="o">:</span>
+<span class="w">                 </span><span class="n">low_qos_req_en</span><span class="w">  </span><span class="o">?</span><span class="w"> </span><span class="n">low_qos_req_pld</span><span class="w">   </span><span class="o">:</span>
+<span class="w">                                   </span><span class="p">{</span><span class="n">PLD_WIDTH</span><span class="p">{</span><span class="mb">1&#39;b0</span><span class="p">}}</span><span class="w"> </span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>always_comb</strong></p></li>
+</ul>
+<p>For complex combinational logic, it is recommended to use <strong>always_comb</strong> rather than <strong>assign</strong>.</p>
+<p><strong>if-else</strong> is used combined with <strong>always_comb</strong> for hierarchical judgement and more user-friendly readability.</p>
+<p>For design based on systemverilog, <strong>always_comb</strong> is implemented to replace <strong>always( * )</strong>.</p>
+<p>For example:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">always_comb</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">dmc_rdata_vld</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">dmc_rdata_last</span><span class="o">==</span><span class="mi">1</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">context_table</span><span class="p">[</span><span class="n">dmc_rdata_id</span><span class="p">].</span><span class="n">dmc_raddr_bit5</span><span class="o">==</span><span class="mi">1</span><span class="w">         </span><span class="n">data_ram_wdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mb">256&#39;b0</span><span class="p">,</span><span class="w"> </span><span class="n">dmc_rdata</span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">            </span><span class="k">else</span><span class="w">                                                     </span><span class="n">data_ram_wdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">dmc_rdata</span><span class="p">,</span><span class="w"> </span><span class="mb">256&#39;b0</span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">context_table</span><span class="p">[</span><span class="n">dmc_rdata_id</span><span class="p">].</span><span class="n">dmc_raddr_bit5</span><span class="o">==</span><span class="mi">1</span><span class="w">         </span><span class="n">data_ram_wdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">dmc_rdata</span><span class="p">,</span><span class="w"> </span><span class="mb">256&#39;b0</span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">            </span><span class="k">else</span><span class="w">                                                     </span><span class="n">data_ram_wdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mb">256&#39;b0</span><span class="p">,</span><span class="w"> </span><span class="n">dmc_rdata</span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span><span class="w">                                                             </span><span class="n">data_ram_wdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">512&#39;b0</span><span class="w">              </span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Summary</strong></p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>For same combinational logic, synthesis result is probably not affected by coding style (assign or always_comb).</p></li>
+<li><p>In fact, always_comb can express all combinational logic with user-friendly readability.</p></li>
+</ol>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="macro.html" class="btn btn-neutral float-left" title="Macro" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sequential_logic.html" class="btn btn-neutral float-right" title="Sequential logic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Yunqi Liu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

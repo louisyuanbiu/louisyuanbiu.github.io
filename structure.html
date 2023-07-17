@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structure &mdash; RTLCodingStyle v1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Macro" href="macro.html" />
+    <link rel="prev" title="Generate if/for" href="generate_if_for.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RTLCodingStyle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="indentation_and_alignment.html">Indentation and alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_naming.html">Variable definition and naming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filelist.html">Filelist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datatype_parameter.html">Data-type Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate_if_for.html">Generate if/for</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macro.html">Macro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinational_logic.html">Combinational logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sequential_logic.html">Sequential logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clock_and_reset.html">Clock and reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RTLCodingStyle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Structure</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/structure.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="structure">
+<h1>Structure<a class="headerlink" href="#structure" title="Permalink to this heading"></a></h1>
+<p>In systemverilog, struct is introduced to pack some signals into an integrated signal.</p>
+<ul class="simple">
+<li><p><strong>Advantage</strong></p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Code length can be significantly reduced.</p></li>
+<li><p>Code readability is improved.</p></li>
+<li><p>Maintenance cost of code is significantly reduced.</p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>Defination</strong></p></li>
+</ul>
+<p>The defination of struct is shown below:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// AXI AW channel</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="k">packed</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="n">AXI_AW_ID_WIDTH</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">      </span><span class="n">id</span><span class="w">    </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="n">AXI_AW_ADDR_WIDTH</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">addr</span><span class="w">  </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="n">AXI_AW_LEN_WIDTH</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">len</span><span class="w">   </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="n">AXI_AW_SIZE_WIDTH</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">size</span><span class="w">  </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">                      </span><span class="n">burst</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w">                            </span><span class="n">lock</span><span class="w">  </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">                      </span><span class="n">cache</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">                      </span><span class="n">prot</span><span class="w">  </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">                      </span><span class="n">qos</span><span class="w">   </span><span class="p">;</span>
+<span class="w">    </span><span class="n">axi_aw_userbit_pack</span><span class="w">              </span><span class="n">user</span><span class="w">  </span><span class="p">;</span><span class="w">  </span><span class="c1">// another struct</span>
+<span class="p">}</span><span class="w"> </span><span class="n">axi_aw_pack</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In this example, it can be concluded that struct can be nested. The struct of “axi_aw_pack” nests the struct of “axi_aw_userbit_pack”.</p>
+<p>In addition, if some field is deleted or added, or its width is changed, you only need to update the struct defination rather than update all code this field involved. It is the advantage for maintenance cost of code.</p>
+<ul class="simple">
+<li><p><strong>invoking</strong></p></li>
+</ul>
+<p>Struct can be invoked to define both IO and internal signal. For example:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// a reg slice defination</span>
+<span class="c1">// support three mode: forward mode (4&#39;b0001), backward mode (4&#39;b0010), full mode (4&#39;b0100), and bypass mode (4&#39;b1000)</span>
+<span class="k">module</span><span class="w"> </span><span class="n">reg_slice</span><span class="p">#(</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">   </span><span class="n">FUNC_MODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">4&#39;b0001</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">type</span><span class="w">          </span><span class="n">PLD_TYPE</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">axi_aw_pack</span>
+<span class="p">)(</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">          </span><span class="n">clk</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">          </span><span class="n">rst_n</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">          </span><span class="n">s_vld</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">          </span><span class="n">s_rdy</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">PLD_TYPE</span><span class="w">       </span><span class="n">s_pld</span><span class="w">  </span><span class="p">,</span><span class="w">  </span><span class="c1">// invoked for IO</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">          </span><span class="n">m_vld</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">          </span><span class="n">m_rdy</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="n">PLD_TYPE</span><span class="w">       </span><span class="n">m_pld</span><span class="w">     </span><span class="c1">// invoked for IO</span>
+<span class="p">);</span>
+<span class="w">    </span><span class="p">......</span>
+<span class="w">    </span><span class="n">PLD_TYPE</span><span class="w">          </span><span class="n">pld_buffer</span><span class="w"> </span><span class="p">;</span><span class="w">  </span><span class="c1">// invoked for internal signal</span>
+<span class="w">    </span><span class="p">......</span>
+
+<span class="w">    </span><span class="c1">// Main Code Start</span>
+<span class="w">    </span><span class="p">......</span>
+<span class="w">    </span><span class="c1">// Main Code End</span>
+
+<span class="k">endmodule</span>
+
+<span class="c1">// instance 1: forward mode</span>
+<span class="n">reg_slice</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">FUNC_MODE</span><span class="w">    </span><span class="p">(</span><span class="mb">4&#39;b0001</span><span class="w">          </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">PLD_TYPE</span><span class="w">     </span><span class="p">(</span><span class="n">axi_aw_pack</span><span class="w">      </span><span class="p">))</span><span class="w">  </span><span class="c1">// passed into instance</span>
+<span class="n">u_rs_gpu_aw</span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk</span><span class="w">          </span><span class="p">(</span><span class="n">clk</span><span class="w">              </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">rst_n</span><span class="w">        </span><span class="p">(</span><span class="n">rst_n</span><span class="w">            </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_vld</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_vld</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_rdy</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_rdy</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_pld</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_pld</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_vld</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_vld_rs</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_rdy</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_rdy_rs</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_pld</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_pld_rs</span><span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>For this example, struct is used as a special parameter. And both IO and internal signal releated to payload are defined by this struct.
+When the module is instantiated, this struct is passed in fromat of parameter.</p>
+<ul class="simple">
+<li><p><strong>accessing</strong></p></li>
+</ul>
+<p>You can use the foramt of “struct_signal.internal_field” to access the desired field.</p>
+<p>And the struct type signal can be assigened as a whole just using a blocking or nonblocking assignment, which is very usefull in reset phase and clear operation.</p>
+<p>The following code shows the goal mentioned above:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// replace original qos with configured value</span>
+<span class="k">always_comb</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">aw_pld_new</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">aw_pld</span><span class="w">       </span><span class="p">;</span><span class="w">  </span><span class="c1">// assign all</span>
+<span class="w">    </span><span class="n">aw_pld_new</span><span class="p">.</span><span class="n">qos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rf_write_qos</span><span class="w"> </span><span class="p">;</span><span class="w">  </span><span class="c1">// re-assign a desired field</span>
+<span class="k">end</span>
+
+<span class="c1">// reset struct type registers</span>
+<span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span>
+<span class="w">        </span><span class="n">aw_pld_buffer</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{$</span><span class="n">bits</span><span class="p">(</span><span class="n">axi_aw_pack</span><span class="p">){</span><span class="mb">1&#39;b0</span><span class="p">}}</span><span class="w"> </span><span class="p">;</span><span class="w">  </span><span class="c1">// reset all</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">aw_vld</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">aw_rdy</span><span class="p">)</span>
+<span class="w">        </span><span class="n">aw_pld_buffer</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">aw_pld</span><span class="w"> </span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generate_if_for.html" class="btn btn-neutral float-left" title="Generate if/for" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="macro.html" class="btn btn-neutral float-right" title="Macro" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Yunqi Liu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

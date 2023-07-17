@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generate if/for &mdash; RTLCodingStyle v1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Structure" href="structure.html" />
+    <link rel="prev" title="Data-type Parameter" href="datatype_parameter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RTLCodingStyle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="indentation_and_alignment.html">Indentation and alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_naming.html">Variable definition and naming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filelist.html">Filelist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datatype_parameter.html">Data-type Parameter</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Generate if/for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macro.html">Macro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinational_logic.html">Combinational logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sequential_logic.html">Sequential logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clock_and_reset.html">Clock and reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RTLCodingStyle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Generate if/for</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/generate_if_for.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="generate-if-for">
+<h1>Generate if/for<a class="headerlink" href="#generate-if-for" title="Permalink to this heading"></a></h1>
+<p><strong>generate</strong> is a method to produce batch code based on user expectations.</p>
+<p>In general, <strong>generate</strong> is always combined with <strong>if</strong> or <strong>for</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>generate-if</strong>: select and produce desired code from a multifunctional design.</p></li>
+<li><p><strong>generate-for</strong>: batch processing code with regularity.</p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>generate-if</strong></p></li>
+</ul>
+<p>For universality and integrability, some design implements all function may used which are seperated by <strong>generate-if</strong>.</p>
+<p>During instantiating, user can select desired function through giving the corresponding parameter.</p>
+<p>For example:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// a reg slice defination</span>
+<span class="c1">// support three mode: forward mode (4&#39;b0001), backward mode (4&#39;b0010), full mode (4&#39;b0100), and bypass mode (4&#39;b1000)</span>
+<span class="k">module</span><span class="w"> </span><span class="n">reg_slice</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">   </span><span class="n">FUNC_MODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">4&#39;b0001</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">type</span><span class="w">          </span><span class="n">PLD_TYPE</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="kt">logic</span>
+<span class="p">)(</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">          </span><span class="n">clk</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">          </span><span class="n">rst_n</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">          </span><span class="n">s_vld</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">          </span><span class="n">s_rdy</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">PLD_TYPE</span><span class="w">       </span><span class="n">s_pld</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">          </span><span class="n">m_vld</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">          </span><span class="n">m_rdy</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="n">PLD_TYPE</span><span class="w">       </span><span class="n">m_pld</span>
+<span class="p">);</span>
+<span class="w">    </span><span class="k">generate</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">FUNC_MODE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mb">4&#39;b0001</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="o">:</span><span class="n">Forward_Mode</span>
+<span class="w">            </span><span class="p">......</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">FUNC_MODE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mb">4&#39;b0010</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="o">:</span><span class="n">Backward_Mode</span>
+<span class="w">            </span><span class="p">......</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">FUNC_MODE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mb">4&#39;b0100</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="o">:</span><span class="n">Full_Mode</span>
+<span class="w">            </span><span class="p">......</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">FUNC_MODE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mb">4&#39;b1000</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="o">:</span><span class="n">Bypass_Mode</span>
+<span class="w">            </span><span class="p">......</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">endgenerate</span>
+
+<span class="k">endmodule</span>
+
+<span class="c1">// instance 1: forward mode</span>
+<span class="n">reg_slice</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">FUNC_MODE</span><span class="w">    </span><span class="p">(</span><span class="mb">4&#39;b0001</span><span class="w">          </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">PLD_TYPE</span><span class="w">     </span><span class="p">(</span><span class="n">slv_aw_pack</span><span class="w">      </span><span class="p">))</span>
+<span class="n">u_rs_gpu_aw</span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk</span><span class="w">          </span><span class="p">(</span><span class="n">clk</span><span class="w">              </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">rst_n</span><span class="w">        </span><span class="p">(</span><span class="n">rst_n</span><span class="w">            </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_vld</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_vld</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_rdy</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_rdy</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_pld</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_pld</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_vld</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_vld_rs</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_rdy</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_rdy_rs</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_pld</span><span class="w">        </span><span class="p">(</span><span class="n">gpu_aw_pld_rs</span><span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// instance 2: full mode</span>
+<span class="n">reg_slice</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">FUNC_MODE</span><span class="w">    </span><span class="p">(</span><span class="mb">4&#39;b0100</span><span class="w">          </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">PLD_TYPE</span><span class="w">     </span><span class="p">(</span><span class="n">mst_aw_pack</span><span class="w">      </span><span class="p">))</span>
+<span class="n">u_rs_dmc_aw</span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk</span><span class="w">          </span><span class="p">(</span><span class="n">clk</span><span class="w">              </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">rst_n</span><span class="w">        </span><span class="p">(</span><span class="n">rst_n</span><span class="w">            </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_vld</span><span class="w">        </span><span class="p">(</span><span class="n">dmc_aw_vld</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_rdy</span><span class="w">        </span><span class="p">(</span><span class="n">dmc_aw_rdy</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">s_pld</span><span class="w">        </span><span class="p">(</span><span class="n">dmc_aw_pld</span><span class="w">       </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_vld</span><span class="w">        </span><span class="p">(</span><span class="n">dmc_aw_vld_rs</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_rdy</span><span class="w">        </span><span class="p">(</span><span class="n">dmc_aw_rdy_rs</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">m_pld</span><span class="w">        </span><span class="p">(</span><span class="n">dmc_aw_pld_rs</span><span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>generate-for</strong></p></li>
+</ul>
+<p>For batching instantiation of modules and implementation of regular code, <strong>generate-for</strong> is very usefull.</p>
+<p>The following exapmle is bacthing instantiation of modules by <strong>generate-for</strong>:</p>
+<p>Note that hierarchy of the generated modules is <em>xxx.yyy.GPU_AW_RS[i].u_rs_gpu_aw</em>.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// instantiate four regslice for all gpu write request path</span>
+<span class="k">genvar</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="k">generate</span><span class="w"> </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="o">:</span><span class="n">GPU_AW_RS</span>
+<span class="w">    </span><span class="n">reg_slice</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">        </span><span class="p">.</span><span class="n">FUNC_MODE</span><span class="w">    </span><span class="p">(</span><span class="mb">4&#39;b0001</span><span class="w">          </span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">PLD_TYPE</span><span class="w">     </span><span class="p">(</span><span class="n">slv_aw_pack</span><span class="w">      </span><span class="p">))</span>
+<span class="w">    </span><span class="n">u_rs_gpu_aw</span><span class="p">(</span>
+<span class="w">        </span><span class="p">.</span><span class="n">clk</span><span class="w">          </span><span class="p">(</span><span class="n">clk</span><span class="w">                  </span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">rst_n</span><span class="w">        </span><span class="p">(</span><span class="n">rst_n</span><span class="w">                </span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">s_vld</span><span class="w">        </span><span class="p">(</span><span class="n">v_gpu_aw_vld</span><span class="w">     </span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">s_rdy</span><span class="w">        </span><span class="p">(</span><span class="n">v_gpu_aw_rdy</span><span class="w">     </span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">s_pld</span><span class="w">        </span><span class="p">(</span><span class="n">v_gpu_aw_pld</span><span class="w">     </span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">m_vld</span><span class="w">        </span><span class="p">(</span><span class="n">v_gpu_aw_vld_rs</span><span class="w">  </span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">m_rdy</span><span class="w">        </span><span class="p">(</span><span class="n">v_gpu_aw_rdy_rs</span><span class="w">  </span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">m_pld</span><span class="w">        </span><span class="p">(</span><span class="n">v_gpu_aw_pld_rs</span><span class="w">  </span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="k">end</span>
+<span class="k">endgenerate</span>
+</pre></div>
+</div>
+<p>The following exapmle is bacthing implementation of regular code by <strong>generate-for</strong>:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// tag check process of a 16 way cache</span>
+<span class="k">genvar</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="k">generate</span><span class="w"> </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">16</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="o">:</span><span class="n">Tag_Check</span>
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">v_tag_hit</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">v_tag_vld</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">v_tag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">req_tag</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="k">end</span>
+<span class="k">endgenerate</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Pay attention to</strong></p></li>
+</ul>
+<ol class="arabic simple">
+<li><p><strong>Loop variable must be declared using genvar for generate-for.</strong></p></li>
+<li><p><strong>Whether it’s generate-if or generate-for, each process block (begin-end) must have unique label (such as GPU_AW_RS).</strong></p></li>
+<li><p><strong>generate-if can be replaced by generate-case to realize the same function.</strong></p></li>
+</ol>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="datatype_parameter.html" class="btn btn-neutral float-left" title="Data-type Parameter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="structure.html" class="btn btn-neutral float-right" title="Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Yunqi Liu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

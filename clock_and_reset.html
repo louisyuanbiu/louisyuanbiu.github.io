@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clock and reset &mdash; RTLCodingStyle v1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Sequential logic" href="sequential_logic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RTLCodingStyle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="indentation_and_alignment.html">Indentation and alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_naming.html">Variable definition and naming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filelist.html">Filelist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datatype_parameter.html">Data-type Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate_if_for.html">Generate if/for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macro.html">Macro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinational_logic.html">Combinational logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sequential_logic.html">Sequential logic</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Clock and reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RTLCodingStyle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Clock and reset</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/clock_and_reset.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="clock-and-reset">
+<h1>Clock and reset<a class="headerlink" href="#clock-and-reset" title="Permalink to this heading"></a></h1>
+<section id="clock">
+<h2>Clock<a class="headerlink" href="#clock" title="Permalink to this heading"></a></h2>
+<p>Clock is a very common signal used in flip-flop, latch, and memory.</p>
+<p>Clock signal is recommanded to be named using recognized abbreviations as <strong>clk</strong>.</p>
+<p>When multiple clock are implemented, suffix is required to be added to distingush each other.</p>
+<p>To be mentioned, the suffix shall be clear and meaningful.</p>
+<p>For example:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">clk_slc</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="c1">// function suffix, System Level Cache clock</span>
+<span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">clk_dmc</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="c1">// function suffix, DDR Memory Controller clock</span>
+<span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">clk_cfg</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="c1">// config suffix</span>
+<span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">clk_dbg</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="c1">// debug suffix</span>
+<span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="p">......</span>
+</pre></div>
+</div>
+<p>In addition, there are some notes for clock.</p>
+<ol class="arabic simple">
+<li><p><strong>ocks that are require dynamic frequency switching are processed by a dedicated glitch free circuit. It must be a common IP and don’t do it by yourself.</strong></p></li>
+<li><p><strong>r clock, “&amp;” and “|” directily written by user will be synthesized as a logic with glitch.</strong></p></li>
+</ol>
+</section>
+<section id="reset">
+<h2>Reset<a class="headerlink" href="#reset" title="Permalink to this heading"></a></h2>
+<p>Like clock, reset is a another common signal used in flip-flop, latch, and memory.</p>
+<p>Reset signal is recommanded to be named using recognized abbreviations as <strong>rst</strong>.</p>
+<p>Given that reset is mostly active low, the above abbreviation is optimized to <strong>rst_n</strong>. “_n” represents low level active.</p>
+<p>As same as clock, suffix is required to be added when multiple reset are implemented.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">rst_n_slc</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="c1">// function suffix, System Level Cache reset</span>
+<span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">rst_n_dmc</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="c1">// function suffix, DDR Memory Controller reset</span>
+<span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">rst_n_hwe</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="c1">// debug suffix, debug IP reset</span>
+<span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">rst_n_sw</span><span class="w">     </span><span class="p">,</span><span class="w"> </span><span class="c1">// software suffix, software reset</span>
+<span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="p">......</span>
+</pre></div>
+</div>
+<p>For triggering mode of reset, it can be asynchronous or synchronous:</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// asynchronous trigger</span>
+<span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="p">......</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="p">......</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1">// synchronous trigger</span>
+<span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="p">......</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="p">......</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><strong>Note that reset shall follow the principle of synchronous releasing.</strong></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sequential_logic.html" class="btn btn-neutral float-left" title="Sequential logic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Yunqi Liu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

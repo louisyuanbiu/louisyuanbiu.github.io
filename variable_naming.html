@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variable definition and naming &mdash; RTLCodingStyle v1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Filelist" href="filelist.html" />
+    <link rel="prev" title="Indentation and alignment" href="indentation_and_alignment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RTLCodingStyle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="indentation_and_alignment.html">Indentation and alignment</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Variable definition and naming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filelist.html">Filelist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datatype_parameter.html">Data-type Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate_if_for.html">Generate if/for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macro.html">Macro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinational_logic.html">Combinational logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sequential_logic.html">Sequential logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clock_and_reset.html">Clock and reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RTLCodingStyle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Variable definition and naming</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/variable_naming.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="variable-definition-and-naming">
+<h1>Variable definition and naming<a class="headerlink" href="#variable-definition-and-naming" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><strong>Explicitly declare the type</strong></p></li>
+</ul>
+<p>verilog/system verilog will use the default type when the type is not clear.</p>
+<p>Some examples are as follows.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// This code does not explicitly declare the type,</span>
+<span class="c1">// and the language automatically inferred it to be 1bit logic type.</span>
+<span class="c1">// It is equivalent to</span>
+<span class="c1">// output logic valid</span>
+<span class="k">output</span><span class="w">  </span><span class="n">valid</span><span class="p">,</span>
+</pre></div>
+</div>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// The language infers that it is of type &quot;integer unsigend&quot; based on its value of &quot;32&quot;.</span>
+<span class="c1">// It is equivalent to</span>
+<span class="c1">// parameter integer unsigned WIDTH = 32</span>
+<span class="k">parameter</span><span class="w"> </span><span class="n">WIDTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span>
+</pre></div>
+</div>
+<p>We should specify the variable type directly, rather than having the language do the type inference.</p>
+<p>Because sometimes the language inference may not match our intention.</p>
+<p>Some good examples are as follows.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">            </span><span class="n">valid</span><span class="p">,</span>
+<span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">payload</span><span class="p">,</span>
+</pre></div>
+</div>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">parameter</span><span class="w"> </span><span class="kt">integer</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">WIDTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span>
+<span class="k">parameter</span><span class="w"> </span><span class="kt">integer</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">DEPTH</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Use the same prefix for the same set of variables</strong></p></li>
+</ul>
+<p>If several IOs or several signals are transmitted and processed in a bus-like manner, i.e. the signals together form a function or protocol.</p>
+<p>An example is a channel of axi.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">input</span><span class="w">   </span><span class="kt">logic</span><span class="w">           </span><span class="n">awvalid</span><span class="w">   </span><span class="p">,</span>
+<span class="k">output</span><span class="w">  </span><span class="kt">logic</span><span class="w">           </span><span class="n">awready</span><span class="w">   </span><span class="p">,</span>
+<span class="k">output</span><span class="w">  </span><span class="kt">logic</span><span class="w">  </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">   </span><span class="n">awaddr</span><span class="w">    </span><span class="p">,</span>
+</pre></div>
+</div>
+<p>For these signals, the same prefix name should be used, a few examples are as follows.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="kt">logic</span><span class="w">           </span><span class="n">in_vld</span><span class="w">  </span><span class="p">;</span>
+<span class="kt">logic</span><span class="w">           </span><span class="n">in_rdy</span><span class="w">  </span><span class="p">;</span>
+<span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">in_data</span><span class="w"> </span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">input</span><span class="w">   </span><span class="kt">logic</span><span class="w">           </span><span class="n">out_rdy</span><span class="w"> </span><span class="p">,</span>
+<span class="k">output</span><span class="w">  </span><span class="kt">logic</span><span class="w">           </span><span class="n">out_vld</span><span class="w"> </span><span class="p">,</span>
+<span class="k">output</span><span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">out_pld</span><span class="w"> </span><span class="p">,</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Add the prefix “v_” to the vector variable</strong></p></li>
+</ul>
+<p>A vector is a group of signals of the same type, but with independent functions.</p>
+<p>For the definition of vectors, two examples are given here.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// This signal consists of 32 independent en&#39;s, so we consider it as a vector that needs to be prefixed.</span>
+<span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">in_v_en</span><span class="w">    </span><span class="p">;</span>
+
+<span class="c1">// The 32 bits within this signal together form a single piece of data, so logically we do not consider this a vector that needs to be prefixed.</span>
+<span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">in_data</span><span class="w">    </span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Meaningful naming</strong></p></li>
+<li><p><strong>Appropriate use of abbreviations</strong></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="indentation_and_alignment.html" class="btn btn-neutral float-left" title="Indentation and alignment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="filelist.html" class="btn btn-neutral float-right" title="Filelist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Yunqi Liu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

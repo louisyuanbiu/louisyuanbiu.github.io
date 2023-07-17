@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data-type Parameter &mdash; RTLCodingStyle v1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Generate if/for" href="generate_if_for.html" />
+    <link rel="prev" title="Parameter" href="parameter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RTLCodingStyle
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="indentation_and_alignment.html">Indentation and alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variable_naming.html">Variable definition and naming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filelist.html">Filelist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data-type Parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate_if_for.html">Generate if/for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macro.html">Macro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="combinational_logic.html">Combinational logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sequential_logic.html">Sequential logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clock_and_reset.html">Clock and reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RTLCodingStyle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data-type Parameter</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/datatype_parameter.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-type-parameter">
+<h1>Data-type Parameter<a class="headerlink" href="#data-type-parameter" title="Permalink to this heading"></a></h1>
+<p>Data-type parameter (paraemter type) is a very useful feature that allows you to pass a type to a parameter and use that parameter to define new variables, an example of which is as follows.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="n">param_test</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">type</span><span class="w"> </span><span class="n">DAT_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">logic</span>
+<span class="p">)(</span>
+<span class="w">    </span><span class="k">input</span><span class="w">   </span><span class="n">DAT_TYPE</span><span class="w"> </span><span class="n">din</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w">  </span><span class="n">DAT_TYPE</span><span class="w"> </span><span class="n">dout</span>
+<span class="p">);</span>
+
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">dout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">din</span><span class="p">;</span>
+
+<span class="k">endmodule</span>
+</pre></div>
+</div>
+<p>The module in the above example can be instantiated as follows.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="c1">//inst 1</span>
+<span class="n">param_test</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">DAT_TYPE</span><span class="p">(</span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">uinst_1</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">din</span><span class="w">    </span><span class="p">(</span><span class="n">din_width3</span><span class="w">     </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dout</span><span class="w">   </span><span class="p">(</span><span class="n">dout_width3</span><span class="w">    </span><span class="p">));</span>
+
+<span class="c1">//inst 2</span>
+<span class="n">param_test</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">DAT_TYPE</span><span class="p">(</span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="o">:</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">u_inst2</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">din</span><span class="w">    </span><span class="p">(</span><span class="n">din_width6</span><span class="w">     </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dout</span><span class="w">   </span><span class="p">(</span><span class="n">dout_width6</span><span class="w">    </span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This use is no different from defining “parameter DATA_WIDTH = 3”, but the parameter type can also support packages, as well as more specific types. Two more meaningful examples are as follows.</p>
+<p>Example 1.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="n">adder</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="n">DAT_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">logic</span>
+<span class="p">)(</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">DAT_TYPE</span><span class="w">         </span><span class="n">din1</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">DAT_TYPE</span><span class="w">         </span><span class="n">din2</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">type</span><span class="p">(</span><span class="n">din1</span><span class="o">+</span><span class="n">din2</span><span class="p">)</span><span class="w">  </span><span class="n">dout</span>
+<span class="p">);</span>
+
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">dout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">din1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">din2</span><span class="p">;</span>
+
+<span class="k">endmodule</span>
+
+<span class="c1">//--------------------------------------------</span>
+<span class="c1">// Inst</span>
+
+<span class="c1">//unsigned_adder</span>
+<span class="n">adder</span><span class="w"> </span><span class="p">#(</span><span class="kt">logic</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="o">:</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">u_uadder</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">din1</span><span class="p">(</span><span class="n">udin1</span><span class="w"> </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">din2</span><span class="p">(</span><span class="n">udin2</span><span class="w"> </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dout</span><span class="p">(</span><span class="n">udout</span><span class="w"> </span><span class="p">));</span>
+
+<span class="c1">//signed_adder</span>
+<span class="n">adder</span><span class="w"> </span><span class="p">#(</span><span class="kt">logic</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="o">:</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">u_sadder</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">din1</span><span class="p">(</span><span class="n">sdin1</span><span class="w"> </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">din2</span><span class="p">(</span><span class="n">sdin2</span><span class="w"> </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dout</span><span class="p">(</span><span class="n">sdout</span><span class="w"> </span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Example 2.</p>
+<p>In this example, if package is added or subtracted arbitrarily, regslice, which is not concerned with package content, can be left unchanged.</p>
+<div class="highlight-systemverilog notranslate"><div class="highlight"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="n">reg_slice</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="n">PLD_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">logic</span>
+<span class="p">)(</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">    </span><span class="n">out_vld</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">out_rdy</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="n">PLD_TYPE</span><span class="w"> </span><span class="n">out_pld</span><span class="w"> </span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">    </span><span class="n">in_vld</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">    </span><span class="n">in_rdy</span><span class="w">  </span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">PLD_TYPE</span><span class="w"> </span><span class="n">in_pld</span>
+<span class="p">);</span>
+
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">out_vld</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">in_vld</span><span class="w">    </span><span class="p">;</span>
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">in_rdy</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">out_rdy</span><span class="w">   </span><span class="p">;</span>
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">out_pld</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">in_pld</span><span class="w">    </span><span class="p">;</span>
+
+<span class="k">endmodule</span>
+
+<span class="kn">package</span><span class="w"> </span><span class="n">PLD1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">addr</span><span class="w">    </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">qos</span><span class="w">     </span><span class="p">;</span>
+<span class="k">endpackage</span>
+
+<span class="kn">package</span><span class="w"> </span><span class="n">PLD2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">addr</span><span class="w">    </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">qos</span><span class="w">     </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">user</span><span class="w">    </span><span class="p">;</span>
+<span class="k">endpackage</span>
+
+<span class="c1">//--------------------------------------------</span>
+<span class="c1">// Inst</span>
+
+<span class="n">reg_slice</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">PLD_TYPE</span><span class="p">(</span><span class="n">PLD1</span><span class="p">))</span>
+<span class="n">u_rs1</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">in_vld</span><span class="w">     </span><span class="p">(</span><span class="n">in_vld1</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">in_rdy</span><span class="w">     </span><span class="p">(</span><span class="n">in_rdy1</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">in_pld</span><span class="w">     </span><span class="p">(</span><span class="n">in_pld1</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">out_vld</span><span class="w">    </span><span class="p">(</span><span class="n">out_vld1</span><span class="w">   </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">out_rdy</span><span class="w">    </span><span class="p">(</span><span class="n">out_rdy1</span><span class="w">   </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">out_pld</span><span class="w">    </span><span class="p">(</span><span class="n">out_pld1</span><span class="w">   </span><span class="p">));</span>
+
+<span class="n">reg_slice</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">PLD_TYPE</span><span class="p">(</span><span class="n">PLD2</span><span class="p">))</span>
+<span class="n">u_rs2</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">in_vld</span><span class="w">     </span><span class="p">(</span><span class="n">in_vld2</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">in_rdy</span><span class="w">     </span><span class="p">(</span><span class="n">in_rdy2</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">in_pld</span><span class="w">     </span><span class="p">(</span><span class="n">in_pld2</span><span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">out_vld</span><span class="w">    </span><span class="p">(</span><span class="n">out_vld2</span><span class="w">   </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">out_rdy</span><span class="w">    </span><span class="p">(</span><span class="n">out_rdy2</span><span class="w">   </span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">out_pld</span><span class="w">    </span><span class="p">(</span><span class="n">out_pld2</span><span class="w">   </span><span class="p">));</span>
+</pre></div>
+</div>
+<p>By using the data-type parameter, a module can be used to handle different data types.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p><strong>This syntax is synthesizable and has been tested on leading commercial synthesis and QC tools.</strong></p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="parameter.html" class="btn btn-neutral float-left" title="Parameter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generate_if_for.html" class="btn btn-neutral float-right" title="Generate if/for" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Yunqi Liu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
